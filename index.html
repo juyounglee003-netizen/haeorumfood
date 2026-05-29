@@ -1,0 +1,1862 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>㈜해오름식품 — 자연에서 온 먹거리</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+/* ================================================
+   RESET & VARIABLES
+   ================================================ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --org:      #FF9027;
+  --org-lt:   #FFB067;
+  --org-pale: #FFF3E6;
+  --org-dim:  #E07010;
+
+  --white:    #FFFFFF;
+  --off:      #FAFAF7;
+  --beige:    #F5F0E8;
+  --beige2:   #EDE5D8;
+  --sand:     #D8CFC0;
+  --wgray:    #8C8880;
+  --mgray:    #5A5652;
+  --dark:     #2A2724;
+
+  --line:     rgba(0,0,0,0.08);
+  --linew:    rgba(180,160,130,0.22);
+
+  --serif:    'Pretendard',sans-serif;
+  --sans:     'Pretendard',sans-serif;
+}
+
+html { scroll-behavior:smooth; }
+body { font-family:var(--sans); background:var(--white); color:var(--dark); font-size:16px; line-height:1.65; -webkit-font-smoothing:antialiased; }
+img  { display:block; max-width:100%; }
+a    { text-decoration:none; color:inherit; }
+button { cursor:pointer; font-family:var(--sans); }
+
+/* ================================================
+   UTILITY
+   ================================================ */
+.tag { display:inline-block; font-size:11px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--org); margin-bottom:10px; }
+.stitle { font-family:var(--sans); font-size:53px; font-weight:700; line-height:1.15; letter-spacing:-1px; color:var(--dark); }
+.btext  { font-size:16px; color:var(--mgray); line-height:1.9; font-weight:400; }
+.divider { width:32px; height:2px; background:var(--org); margin:16px 0; }
+.divider.c { margin:16px auto; }
+
+.btn-p {
+  display:inline-block; background:var(--org); color:#fff; border:none;
+  padding:13px 28px; border-radius:3px; font-size:14px; font-weight:700;
+  letter-spacing:0.5px; transition:background .2s,transform .15s;
+}
+.btn-p:hover { background:var(--org-dim); transform:translateY(-1px); }
+
+.btn-g {
+  display:inline-block; background:transparent; color:var(--dark);
+  border:1px solid var(--sand); padding:12px 24px; border-radius:3px;
+  font-size:14px; font-weight:500; letter-spacing:0.3px; transition:all .2s;
+}
+.btn-g:hover { border-color:var(--org); color:var(--org); }
+
+.ph {
+  background:var(--beige); display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:10px;
+  color:var(--wgray); font-size:11px; letter-spacing:1.2px;
+}
+.ph svg { opacity:.45; }
+
+/* ================================================
+   NAV
+   ================================================ */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:999;
+  background:rgba(250,250,247,.97); backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line); height:64px;
+  display:flex; align-items:center; padding:0 5.5%; justify-content:space-between;
+}
+.nav-logo { display:flex; align-items:center; gap:10px; cursor:pointer; }
+.nav-logo-mark {
+  width:32px; height:32px; border-radius:50%; background:var(--org);
+  display:flex; align-items:center; justify-content:center;
+}
+.nav-logo-name { font-family:var(--sans); font-size:19px; font-weight:700; color:var(--dark); letter-spacing:-0.2px; }
+.nav-logo-sub  { font-size:10px; color:var(--wgray); letter-spacing:1.8px; text-transform:uppercase; display:block; margin-top:-3px; }
+.nav-links { display:flex; list-style:none; gap:2px; }
+.nav-links li button {
+  background:none; border:none; padding:8px 14px; font-size:14px; font-weight:500;
+  color:var(--mgray); border-radius:3px; transition:all .2s; letter-spacing:0.2px;
+}
+.nav-links li button:hover { color:var(--dark); }
+.nav-links li button.active { color:var(--dark); font-weight:700; }
+.nav-links li button.cta {
+  background:var(--org); color:#fff; margin-left:6px; font-weight:700;
+}
+.nav-links li button.cta:hover { background:var(--org-dim); }
+
+.pages { padding-top:64px; }
+.page  { display:none; animation:fadeUp .35s ease; }
+.page.active { display:block; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+/* ================================================
+   HOME
+   ================================================ */
+
+/* Hero — full-width banner */
+.hero {
+  position:relative; width:100%; height:calc(100vh - 64px); min-height:560px;
+  overflow:hidden; display:flex; align-items:flex-end;
+}
+.hero-bg {
+  position:absolute; inset:0; background:var(--beige2);
+  /* 실제 이미지로 교체 시: background-image:url('hero.jpg'); background-size:cover; background-position:center; */
+}
+.hero-overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(to right,rgba(26,20,14,.75) 0%,rgba(26,20,14,.45) 50%,rgba(26,20,14,.08) 100%);
+}
+.hero-content {
+  position:relative; z-index:2; width:100%; padding:0 6% 68px;
+}
+.hero-eyebrow {
+  display:inline-flex; align-items:center; gap:8px; font-size:11px; font-weight:700;
+  letter-spacing:2.5px; text-transform:uppercase; color:rgba(255,255,255,.6); margin-bottom:18px;
+}
+.hero-eyebrow::before {
+  content:''; display:block; width:24px; height:1.5px; background:var(--org);
+}
+.hero-h1 {
+  font-family:var(--sans); font-size:107px; font-weight:800; line-height:1.0;
+  letter-spacing:-3px; color:var(--white); margin-bottom:18px; max-width:780px;
+}
+.hero-h1 em { font-style:italic; color:var(--org-lt); }
+.hero-sub {
+  font-size:16px; color:rgba(255,255,255,.7); line-height:1.85; max-width:460px;
+  margin-bottom:34px; font-weight:400; border-left:2px solid var(--org); padding-left:16px;
+}
+.hero-btns { display:flex; gap:12px; }
+.hero-certs {
+  display:flex; gap:24px; margin-top:42px; padding-top:24px;
+  border-top:1px solid rgba(255,255,255,.14); flex-wrap:wrap;
+}
+.cert-pill { display:flex; align-items:center; gap:7px; font-size:11.5px; font-weight:600; color:rgba(255,255,255,.58); }
+.cert-dot  { width:6px; height:6px; border-radius:50%; background:var(--org); flex-shrink:0; }
+.hero-img-label {
+  position:absolute; bottom:28px; right:6%; z-index:3;
+  font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase;
+  color:rgba(255,255,255,.28); border-bottom:1px solid rgba(255,255,255,.15); padding-bottom:4px;
+}
+
+/* Values bar */
+.vals {
+  display:grid; grid-template-columns:repeat(4,1fr);
+  border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--white);
+}
+.val-item { padding:26px 24px; border-right:1px solid var(--line); display:flex; flex-direction:column; gap:5px; }
+.val-item:last-child { border-right:none; }
+.val-label { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--org); }
+.val-desc  { font-size:14px; color:var(--mgray); line-height:1.65; font-weight:400; }
+
+/* Product preview */
+.prod-prev { padding:80px 6%; background:var(--off); }
+.prod-prev-inner { display:grid; grid-template-columns:1fr 2.2fr; gap:64px; align-items:start; }
+.prod-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.prod-card {
+  background:var(--white); border:1px solid var(--line); border-radius:3px;
+  overflow:hidden; transition:box-shadow .2s,transform .2s; cursor:pointer;
+}
+.prod-card:hover { transform:translateY(-3px); box-shadow:0 8px 28px rgba(0,0,0,.08); }
+.prod-card-img { height:120px; }
+.c1{background:linear-gradient(135deg,#F0E5C0,#E2D090);}
+.c2{background:linear-gradient(135deg,#DCE8C8,#C0D898);}
+.c3{background:linear-gradient(135deg,#F8E2C4,#F0C890);}
+.c4{background:linear-gradient(135deg,#E8DECE,#D8C8B0);}
+.c5{background:linear-gradient(135deg,#E8E0D0,#D8C8A8);}
+.c6{background:linear-gradient(135deg,#F4E8D0,#E8D0A8);}
+.prod-card-body { padding:12px 14px 16px; }
+.prod-card-name { font-size:14px; font-weight:700; color:var(--dark); margin-bottom:4px; }
+.prod-card-desc { font-size:12px; color:var(--wgray); line-height:1.6; }
+
+/* CTA strip */
+.cta-strip {
+  padding:64px 6%; background:var(--dark);
+  display:flex; align-items:center; justify-content:space-between; gap:32px;
+}
+.cta-strip h2 { font-family:var(--sans); font-size:53px; font-weight:700; color:var(--white); line-height:1.2; letter-spacing:-1px; }
+.cta-strip p  { font-size:16px; color:rgba(255,255,255,.55); margin-top:8px; font-weight:400; }
+
+/* ================================================
+   ABOUT
+   ================================================ */
+
+/* Hero — taller, image more prominent */
+.about-hero {
+  display:grid; grid-template-columns:1fr 1fr; min-height:580px;
+}
+.about-hero-left {
+  padding:76px 6% 76px 6%; display:flex; flex-direction:column;
+  justify-content:center; background:var(--off);
+}
+.about-hero-right { background:var(--beige2); position:relative; overflow:hidden; min-height:580px; }
+
+/* Company info grid */
+.info-grid-section { padding:60px 6%; background:var(--white); border-bottom:1px solid var(--line); }
+.info-grid {
+  display:grid; grid-template-columns:repeat(6,1fr);
+  border:1px solid var(--line); border-radius:3px; overflow:hidden;
+}
+.info-cell {
+  padding:20px 18px; border-right:1px solid var(--line); background:var(--white);
+}
+.info-cell:last-child { border-right:none; }
+.info-cell-label { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--org); margin-bottom:6px; }
+.info-cell-val   { font-size:14px; font-weight:700; color:var(--dark); line-height:1.5; }
+
+/* About image mosaic strip (below info grid) */
+.about-img-strip {
+  display:grid;
+  grid-template-columns:1.6fr 1fr 1fr;
+  height:280px;
+  gap:4px;
+  background:var(--dark);
+}
+.about-img-strip .ai-cell { overflow:hidden; }
+
+/* Values — image on right */
+.values-section { padding:80px 6%; background:var(--beige); }
+.values-inner { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start; }
+.values-grid { display:flex; flex-direction:column; gap:0; margin-top:0; }
+.value-row {
+  display:flex; gap:20px; padding:22px 0;
+  border-bottom:1px solid var(--linew); align-items:flex-start;
+}
+.value-row:first-child { padding-top:0; }
+.value-row:last-child  { border-bottom:none; padding-bottom:0; }
+.value-ico {
+  width:40px; height:40px; border-radius:3px; background:rgba(255,144,39,.1);
+  display:flex; align-items:center; justify-content:center; color:var(--org); flex-shrink:0;
+}
+.value-title { font-size:16px; font-weight:700; color:var(--dark); margin-bottom:5px; }
+.value-desc  { font-size:14px; color:var(--mgray); line-height:1.75; font-weight:400; }
+.values-img-side { display:flex; flex-direction:column; gap:8px; }
+.values-img-large { height:280px; border-radius:3px; overflow:hidden; }
+.values-img-small { height:160px; border-radius:3px; overflow:hidden; }
+
+/* History — image column on right */
+.history-section { padding:80px 6%; background:var(--white); }
+.history-layout { display:grid; grid-template-columns:1fr 360px; gap:56px; align-items:start; }
+.history-table { margin-top:40px; border-top:2px solid var(--dark); }
+.h-row {
+  display:grid; grid-template-columns:88px 1fr; gap:20px;
+  padding:16px 0; border-bottom:1px solid var(--line); align-items:baseline;
+}
+.h-year { font-family:var(--sans); font-size:18px; font-weight:700; color:var(--org); }
+.h-items { display:flex; flex-direction:column; gap:3px; }
+.h-item  { font-size:14px; color:var(--mgray); font-weight:400; line-height:1.7; }
+.h-item .mo { font-size:12px; color:var(--wgray); font-weight:600; margin-right:8px; letter-spacing:.5px; }
+.history-img-col { position:sticky; top:90px; display:flex; flex-direction:column; gap:8px; }
+.history-img-main { height:340px; border-radius:3px; overflow:hidden; }
+.history-img-sub  { height:180px; border-radius:3px; overflow:hidden; }
+
+/* Partners */
+.partners-section { padding:80px 6%; background:var(--off); border-top:1px solid var(--line); }
+.partners-lead { margin-bottom:44px; }
+.partners-logos {
+  display:grid; grid-template-columns:repeat(7,1fr); gap:0;
+  border:1px solid var(--line); border-radius:3px; overflow:hidden;
+}
+.partner-logo {
+  padding:20px 16px; border-right:1px solid var(--line); border-bottom:1px solid var(--line);
+  display:flex; align-items:center; justify-content:center; background:var(--white);
+  transition:background .2s;
+}
+.partner-logo:hover { background:var(--beige); }
+.partner-logo span {
+  font-size:13px; font-weight:700; color:var(--mgray); letter-spacing:.5px;
+  text-align:center; line-height:1.4;
+}
+
+/* About — image gallery strip (after partners) */
+.about-gallery-section { padding:0; background:var(--dark); }
+.about-gallery-grid {
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  grid-template-rows:240px 240px;
+  gap:3px;
+}
+.ag-cell { overflow:hidden; }
+.ag-cell.tall { grid-row:1/3; }
+.ag-label {
+  position:absolute; bottom:12px; left:14px;
+  font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
+  color:rgba(255,255,255,.5); background:rgba(0,0,0,.3);
+  padding:4px 8px; border-radius:2px;
+}
+.ag-cell-wrap { position:relative; width:100%; height:100%; }
+
+/* ================================================
+   MANUFACTURING
+   ================================================ */
+
+.mfg-hero { padding:76px 6% 68px; background:var(--beige); display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
+.mfg-hero-img { height:360px; border-radius:3px; overflow:hidden; }
+
+/* One-Stop service */
+.onestop-section { padding:72px 6%; background:var(--white); border-top:1px solid var(--line); }
+.onestop-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:3px; overflow:hidden; margin-top:40px; }
+.os-item { background:var(--white); padding:28px 20px; text-align:center; transition:background .2s; }
+.os-item:hover { background:var(--beige); }
+.os-num  { font-family:var(--sans); font-size:30px; color:var(--org-pale); line-height:1; margin-bottom:8px; font-weight:800; }
+.os-ico  { width:44px; height:44px; border-radius:50%; border:1.5px solid var(--org); display:flex; align-items:center; justify-content:center; margin:0 auto 10px; color:var(--org); }
+.os-name { font-size:14px; font-weight:700; color:var(--dark); margin-bottom:6px; }
+.os-desc { font-size:13px; color:var(--wgray); line-height:1.65; font-weight:400; }
+
+/* OEM Process */
+.process-section { padding:76px 6%; background:var(--off); border-top:1px solid var(--line); }
+.process-steps { display:grid; grid-template-columns:repeat(4,1fr); gap:0; position:relative; margin-top:44px; }
+.process-steps::before {
+  content:''; position:absolute; top:36px; left:12.5%; right:12.5%;
+  height:1.5px; background:linear-gradient(to right,var(--org),var(--org-lt));
+}
+.proc-step { text-align:center; position:relative; z-index:1; }
+.proc-num {
+  width:72px; height:72px; border-radius:50%; margin:0 auto 16px;
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--sans); font-size:22px; font-weight:700; background:var(--white);
+  border:2px solid var(--org); color:var(--org);
+}
+.proc-name { font-size:15px; font-weight:700; color:var(--dark); margin-bottom:8px; }
+.proc-items { list-style:none; display:flex; flex-direction:column; gap:4px; }
+.proc-items li { font-size:13px; color:var(--wgray); font-weight:400; }
+
+/* Product list */
+.prodlist-section { padding:76px 6%; background:var(--white); border-top:1px solid var(--line); }
+.prodlist-grid { display:grid; gap:16px; margin-top:40px; }
+.prodlist-card {
+  display:grid; grid-template-columns:220px 1fr;
+  background:var(--off); border:1px solid var(--line); border-radius:3px; overflow:hidden;
+  transition:box-shadow .2s;
+}
+.prodlist-card:hover { box-shadow:0 6px 24px rgba(0,0,0,.07); }
+.prodlist-img { min-height:160px; }
+.prodlist-body { padding:24px 28px; display:flex; flex-direction:column; justify-content:center; }
+.prodlist-chip {
+  display:inline-block; font-size:10px; font-weight:700; letter-spacing:1.5px;
+  text-transform:uppercase; color:var(--org); border:1px solid rgba(255,144,39,.3);
+  padding:3px 9px; border-radius:2px; margin-bottom:8px;
+}
+.prodlist-name { font-family:var(--sans); font-size:22px; font-weight:700; color:var(--dark); margin-bottom:8px; }
+.prodlist-desc { font-size:14px; color:var(--mgray); line-height:1.8; font-weight:400; }
+
+/* Equipment */
+.equip-section { padding:72px 6%; background:var(--dark); }
+.equip-section .tag { color:var(--org-lt); }
+.equip-section .stitle { color:var(--white); }
+.equip-section .btext { color:rgba(255,255,255,.5); }
+.equip-section .divider { background:var(--org); }
+.equip-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.07); margin-top:40px; }
+.equip-item { background:var(--dark); padding:20px 18px; }
+.equip-cat  { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--org-lt); margin-bottom:8px; }
+.equip-list { list-style:none; display:flex; flex-direction:column; gap:5px; }
+.equip-list li { font-size:14px; color:rgba(255,255,255,.6); font-weight:400; padding-left:10px; position:relative; }
+.equip-list li::before { content:'—'; position:absolute; left:0; color:var(--org); font-size:10px; top:1px; }
+
+/* Factory photos */
+.factory-section { padding:72px 6%; background:var(--off); border-top:1px solid var(--line); }
+.factory-grid { display:grid; grid-template-columns:2fr 1fr 1fr; grid-template-rows:190px 190px; gap:8px; margin-top:36px; }
+.fac-cell { border-radius:3px; overflow:hidden; }
+.fac-cell.span { grid-row:1/3; }
+
+/* ================================================
+   QUALITY
+   ================================================ */
+.qual-hero { background:var(--beige); padding:76px 6% 0; overflow:hidden; }
+.qual-hero-inner { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:flex-end; }
+.qual-hero-text { padding-bottom:76px; }
+.qual-hero-img  { height:400px; }
+
+/* Certifications */
+.cert-section { padding:72px 6%; background:var(--white); }
+.cert-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:36px; }
+.cert-card {
+  background:var(--off); border:1px solid var(--line); border-radius:3px;
+  padding:22px 20px; transition:border-color .2s;
+}
+.cert-card:hover { border-color:var(--sand); }
+.cert-badge-label {
+  display:inline-block; font-size:10px; font-weight:700; letter-spacing:1.5px;
+  text-transform:uppercase; background:var(--org); color:#fff; padding:3px 9px;
+  border-radius:2px; margin-bottom:10px;
+}
+.cert-name { font-size:15px; font-weight:700; color:var(--dark); margin-bottom:5px; }
+.cert-desc { font-size:14px; color:var(--mgray); line-height:1.75; font-weight:400; }
+
+/* HACCP flow */
+.haccp-section { padding:72px 6%; background:var(--off); border-top:1px solid var(--line); }
+.haccp-stages {
+  display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+  background:var(--line); border:1px solid var(--line); border-radius:3px; overflow:hidden; margin-top:40px;
+}
+.haccp-stage { background:var(--white); padding:26px 20px; }
+.stage-lbl  { font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--org); margin-bottom:6px; }
+.stage-name { font-family:var(--sans); font-size:22px; font-weight:700; color:var(--dark); margin-bottom:10px; line-height:1.2; }
+.stage-list { list-style:none; display:flex; flex-direction:column; gap:5px; }
+.stage-list li {
+  display:flex; align-items:flex-start; gap:8px;
+  font-size:14px; color:var(--mgray); font-weight:400; line-height:1.55;
+}
+.stage-list li::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--sand); flex-shrink:0; margin-top:6px; }
+
+/* Hazard */
+.hazard-section { padding:64px 6%; background:var(--white); border-top:1px solid var(--line); }
+.hazard-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:32px; }
+.hazard-card { background:var(--off); border:1px solid var(--line); border-radius:3px; padding:22px 20px; }
+.htag { display:inline-block; font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#fff; padding:3px 9px; border-radius:2px; margin-bottom:10px; }
+.htag.bio  { background:#6B8E5A; }
+.htag.chem { background:#7A7260; }
+.htag.phys { background:#5A7080; }
+.hname { font-size:15px; font-weight:700; color:var(--dark); margin-bottom:5px; }
+.hdesc { font-size:14px; color:var(--mgray); line-height:1.75; font-weight:400; }
+
+/* ================================================
+   CONTACT
+   ================================================ */
+.contact-hero {
+  background:var(--dark); padding:76px 6% 68px; position:relative; overflow:hidden;
+}
+.contact-hero::before {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(135deg,rgba(255,144,39,.07) 0%,transparent 60%);
+}
+.contact-hero .tag { color:rgba(240,146,106,.85); position:relative; }
+.contact-hero .stitle { color:var(--white); position:relative; }
+.contact-hero .btext  { color:rgba(255,255,255,.48); position:relative; }
+.contact-hero .divider { background:var(--org); position:relative; }
+
+.contact-main { padding:64px 6%; background:var(--off); }
+
+/* Contact layout — info card + map, no form */
+.contact-info-map {
+  display:grid;
+  grid-template-columns:380px 1fr;
+  gap:28px;
+  align-items:start;
+  max-width:1100px;
+}
+
+/* Info card */
+.cinfo-box { background:var(--white); border:1px solid var(--line); border-radius:3px; overflow:hidden; }
+.cinfo-head { background:var(--org); padding:20px 22px; }
+.cinfo-head h3 { font-family:var(--sans); font-size:20px; font-weight:700; color:#fff; margin-bottom:3px; }
+.cinfo-head p  { font-size:14px; color:rgba(255,255,255,.75); font-weight:400; }
+.cinfo-rows { padding:18px 22px; display:flex; flex-direction:column; gap:14px; }
+.cinfo-row  { display:flex; gap:12px; align-items:flex-start; }
+.cinfo-ico  {
+  width:30px; height:30px; border-radius:3px; background:var(--org-pale);
+  display:flex; align-items:center; justify-content:center; color:var(--org); flex-shrink:0;
+}
+.cinfo-label { font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--wgray); margin-bottom:2px; }
+.cinfo-val   { font-size:14px; color:var(--dark); line-height:1.5; }
+.cdivider    { height:1px; background:var(--line); }
+.hours-box   { padding:14px 22px 18px; border-top:1px solid var(--line); background:var(--off); }
+.hours-title { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--wgray); margin-bottom:10px; }
+.hours-row   { display:flex; justify-content:space-between; font-size:14px; padding:5px 0; border-bottom:1px solid var(--line); }
+.hours-row:last-child { border-bottom:none; }
+.hours-row .dy { color:var(--wgray); font-weight:400; }
+.hours-row .tm { color:var(--dark); font-weight:600; }
+
+/* Map — taller now that form is gone */
+.map-box {
+  background:var(--white); border:1px solid var(--line); border-radius:3px; overflow:hidden;
+}
+.map-ph-area {
+  height:420px; background:var(--beige2); display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:8px; color:var(--wgray);
+}
+.map-footer { padding:16px 20px; background:var(--off); }
+.map-addr { font-size:14px; color:var(--mgray); line-height:1.8; font-weight:400; }
+
+/* FAQ */
+.faq-section { padding:64px 6%; background:var(--white); border-top:1px solid var(--line); }
+.faq-inner { display:grid; grid-template-columns:260px 1fr; gap:56px; align-items:start; }
+.faq-left  { position:sticky; top:84px; }
+.faq-list  { border-top:2px solid var(--dark); }
+.faq-item  { border-bottom:1px solid var(--line); }
+.faq-q {
+  padding:17px 0; font-size:15px; font-weight:600; color:var(--dark);
+  display:flex; justify-content:space-between; align-items:center; gap:14px; cursor:pointer;
+}
+.faq-q:hover { color:var(--org); }
+.faq-arrow {
+  width:22px; height:22px; border-radius:50%; border:1px solid var(--sand);
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  transition:all .25s; color:var(--wgray);
+}
+.faq-a       { max-height:0; overflow:hidden; transition:max-height .3s ease; }
+.faq-a-inner { padding:0 0 16px; font-size:14px; color:var(--mgray); line-height:1.85; font-weight:400; }
+.faq-item.open .faq-a      { max-height:250px; }
+.faq-item.open .faq-q      { color:var(--org); }
+.faq-item.open .faq-arrow  { transform:rotate(180deg); border-color:var(--org); color:var(--org); }
+
+/* ================================================
+   FOOTER
+   ================================================ */
+footer { background:var(--dark); padding:40px 6%; }
+.foot-inner { display:flex; justify-content:space-between; align-items:flex-start; gap:24px; flex-wrap:wrap; }
+.foot-brand .fl { font-family:var(--sans); font-size:20px; font-weight:700; color:rgba(255,255,255,.85); margin-bottom:7px; }
+.foot-brand p   { font-size:14px; color:rgba(255,255,255,.4); line-height:1.85; font-weight:400; }
+.foot-links { display:flex; gap:20px; align-items:center; flex-wrap:wrap; margin-top:4px; }
+.foot-links a { font-size:14px; color:rgba(255,255,255,.4); transition:color .2s; }
+.foot-links a:hover { color:rgba(255,255,255,.75); }
+.foot-bottom {
+  margin-top:24px; padding-top:18px; border-top:1px solid rgba(255,255,255,.06);
+  font-size:13px; color:rgba(255,255,255,.25);
+}
+
+/* ================================================
+   HAMBURGER MENU
+   ================================================ */
+.nav-hamburger {
+  display:none; flex-direction:column; gap:5px; cursor:pointer;
+  padding:6px; background:none; border:none;
+}
+.nav-hamburger span {
+  display:block; width:22px; height:2px; background:var(--dark);
+  border-radius:2px; transition:all .25s;
+}
+.nav-hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity:0; }
+.nav-hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+
+.nav-drawer {
+  display:none; position:fixed; top:64px; left:0; right:0; bottom:0;
+  background:rgba(250,250,247,.98); z-index:998; flex-direction:column;
+  padding:24px 6%; overflow-y:auto; border-top:1px solid var(--line);
+}
+.nav-drawer.open { display:flex; }
+.nav-drawer button {
+  background:none; border:none; padding:16px 0; font-size:16px; font-weight:500;
+  color:var(--mgray); text-align:left; border-bottom:1px solid var(--line);
+  letter-spacing:0.2px; font-family:var(--sans);
+}.nav-drawer button:last-child { border-bottom:none; }
+.nav-drawer button.active { color:var(--dark); font-weight:700; }
+.nav-drawer button.cta-mob {
+  margin-top:16px; background:var(--org); color:#fff; padding:14px 20px;
+  border-radius:3px; text-align:center; font-weight:700; border:none;
+}
+
+/* ================================================
+   RESPONSIVE — TABLET (≤ 1024px)
+   ================================================ */
+@media (max-width:1024px) {
+  /* Nav */
+  .nav-links { display:none; }
+  .nav-hamburger { display:flex; }
+
+  /* Hero */
+  .hero-h1 { font-size:64px; }
+
+  /* Home vals */
+  .vals { grid-template-columns:repeat(2,1fr); }
+  .vals .val-item:nth-child(2) { border-right:none; }
+
+  /* Home products */
+  .prod-prev-inner { grid-template-columns:1fr; gap:32px; }
+  .prod-grid { grid-template-columns:repeat(3,1fr); }
+
+  /* About hero */
+  .about-hero { grid-template-columns:1fr; }
+  .about-hero-right { display:none; }
+  .about-hero-left { padding:56px 6%; }
+
+  /* Info grid */
+  .info-grid { grid-template-columns:repeat(3,1fr); }
+  .info-cell:nth-child(3) { border-right:none; }
+
+  /* Values section */
+  .values-inner { grid-template-columns:1fr; gap:36px; }
+
+  /* Partners logos */
+  .partners-logos { grid-template-columns:repeat(4,1fr); }
+
+  /* Org chart */
+  .org-teams { grid-template-columns:repeat(3,1fr); gap:10px; }
+  .org-teams::before { display:none; }
+
+  /* Mfg hero */
+  .mfg-hero { grid-template-columns:1fr; }
+  .mfg-hero-img { display:none; }
+
+  /* One-stop */
+  .onestop-grid { grid-template-columns:repeat(3,1fr); }
+
+  /* Process */
+  .process-steps { grid-template-columns:repeat(2,1fr); gap:32px; }
+  .process-steps::before { display:none; }
+
+  /* Product list cards */
+  .prodlist-card { grid-template-columns:180px 1fr; }
+
+  /* Equipment */
+  .equip-grid { grid-template-columns:repeat(2,1fr); }
+
+  /* Factory grid */
+  .factory-grid { grid-template-columns:1fr 1fr; grid-template-rows:180px 180px 180px; }
+  .fac-cell.span { grid-row:auto; }
+
+  /* Quality hero */
+  .qual-hero-inner { grid-template-columns:1fr; }
+  .qual-hero-img { display:none; }
+  .qual-hero-text { padding-bottom:56px; }
+
+  /* Cert grid */
+  .cert-grid { grid-template-columns:repeat(2,1fr); }
+
+  /* HACCP */
+  .haccp-stages { grid-template-columns:repeat(2,1fr); }
+
+  /* Hazard */
+  .hazard-grid { grid-template-columns:repeat(2,1fr); }
+
+  /* Contact */
+  .contact-info-map { grid-template-columns:1fr; }
+  .map-ph-area { height:300px; }
+
+  /* FAQ */
+  .faq-inner { grid-template-columns:1fr; gap:32px; }
+  .faq-left { position:static; }
+
+  /* History layout */
+  .history-layout { grid-template-columns:1fr; }
+  .history-img-col { display:none; }
+
+  /* About gallery */
+  .about-gallery-grid { grid-template-columns:1fr 1fr; grid-template-rows:200px 200px 200px; }
+  .ag-cell.tall { grid-row:1/3; }
+
+  /* CTA strip */
+  .cta-strip { flex-direction:column; align-items:flex-start; gap:20px; }
+}
+
+/* ================================================
+   RESPONSIVE — MOBILE (≤ 640px)
+   ================================================ */
+@media (max-width:640px) {
+  /* Base */
+  .stitle { font-size:32px; }
+  .btext  { font-size:14px; }
+
+  /* Sections padding */
+  .prod-prev,
+  .about-hero-left,
+  .info-grid-section,
+  .values-section,
+  .history-section,
+  .partners-section,
+  .mfg-hero,
+  .onestop-section,
+  .process-section,
+  .prodlist-section,
+  .equip-section,
+  .factory-section,
+  .qual-hero-text,
+  .qual-hero,
+  .cert-section,
+  .haccp-section,
+  .hazard-section,
+  .contact-hero,
+  .contact-main,
+  .faq-section,
+  footer { padding-left:5%; padding-right:5%; }
+
+  .prod-prev        { padding-top:52px; padding-bottom:52px; }
+  .values-section   { padding-top:52px; padding-bottom:52px; }
+  .history-section  { padding-top:52px; padding-bottom:52px; }
+  .partners-section { padding-top:52px; padding-bottom:52px; }
+  .onestop-section  { padding-top:52px; padding-bottom:52px; }
+  .process-section  { padding-top:52px; padding-bottom:52px; }
+  .prodlist-section { padding-top:52px; padding-bottom:52px; }
+  .equip-section    { padding-top:52px; padding-bottom:52px; }
+  .factory-section  { padding-top:52px; padding-bottom:52px; }
+  .cert-section     { padding-top:52px; padding-bottom:52px; }
+  .haccp-section    { padding-top:52px; padding-bottom:52px; }
+  .hazard-section   { padding-top:40px; padding-bottom:40px; }
+  .contact-main     { padding-top:40px; padding-bottom:40px; }
+  .faq-section      { padding-top:44px; padding-bottom:44px; }
+
+  /* About gallery mobile */
+  .about-gallery-grid { grid-template-columns:1fr; grid-template-rows:repeat(5,160px); }
+  .ag-cell.tall { grid-row:auto; }
+
+  /* Contact mobile */
+  .map-ph-area { height:220px; }
+
+  /* Hero */
+  .hero { min-height:520px; height:calc(100svh - 64px); }
+  .hero-content { padding:0 5% 48px; }
+  .hero-h1 { font-size:48px; letter-spacing:-1.5px; }
+  .hero-sub { font-size:14px; max-width:100%; }
+  .hero-btns { flex-direction:column; align-items:flex-start; gap:10px; }
+  .hero-btns .btn-p,
+  .hero-btns .btn-g { width:100%; text-align:center; padding:13px 20px; }
+  .hero-certs { gap:12px; margin-top:28px; padding-top:18px; }
+  .cert-pill { font-size:10.5px; }
+  .hero-img-label { display:none; }
+  .hero-overlay {
+    background:linear-gradient(to bottom,rgba(26,20,14,.5) 0%,rgba(26,20,14,.75) 100%);
+  }
+
+  /* Values bar */
+  .vals { grid-template-columns:1fr 1fr; }
+  .vals .val-item { padding:18px 16px; }
+  .vals .val-item:nth-child(2) { border-right:none; }
+  .vals .val-item:nth-child(3) { border-right:1px solid var(--line); }
+  .vals .val-item:nth-child(4) { border-right:none; }
+  .val-desc { display:none; }
+
+  /* Home products */
+  .prod-grid { grid-template-columns:repeat(2,1fr); }
+  .prod-prev-inner { gap:24px; }
+
+  /* CTA strip */
+  .cta-strip { padding:44px 5%; gap:16px; }
+  .cta-strip h2 { font-size:28px; }
+
+  /* Info grid */
+  .info-grid { grid-template-columns:repeat(2,1fr); }
+  .info-cell:nth-child(2) { border-right:none; }
+  .info-cell:nth-child(3) { border-right:1px solid var(--line); }
+  .info-cell:nth-child(4) { border-right:none; }
+  .info-cell:nth-child(5) { border-right:1px solid var(--line); }
+  .info-cell:nth-child(6) { border-right:none; }
+  .info-grid-section { padding-top:36px; padding-bottom:36px; }
+
+  /* History */
+  .h-row { grid-template-columns:72px 1fr; gap:12px; }
+  .h-year { font-size:15px; }
+  .h-item { font-size:14px; }
+
+  /* Partners */
+  .partners-logos { grid-template-columns:repeat(3,1fr); }
+  .partner-logo { padding:14px 10px; }
+  .partner-logo span { font-size:10.5px; }
+
+  /* Org chart — list view on mobile */
+  .org-chart { margin-top:28px; }
+  .org-top { justify-content:flex-start; }
+  .org-ceo-box { font-size:12px; padding:10px 20px; }
+  .org-teams {
+    grid-template-columns:repeat(2,1fr); margin:16px 0 0 0 !important;
+    width:100% !important;
+  }
+  .org-teams::before { display:none; }
+  .org-team-vline { height:14px; }
+  .org-team-box { font-size:11px; padding:8px 0; }
+  .org-sub-box  { font-size:10px; padding:6px 8px; }
+
+  /* One-stop */
+  .onestop-grid { grid-template-columns:1fr 1fr; }
+  .os-item { padding:20px 14px; }
+
+  /* Process */
+  .process-steps { grid-template-columns:1fr 1fr; gap:24px; }
+  .proc-num { width:56px; height:56px; font-size:17px; }
+
+  /* Product list cards */
+  .prodlist-card { grid-template-columns:1fr; }
+  .prodlist-img { height:140px; }
+  .prodlist-body { padding:18px 18px 20px; }
+  .prodlist-name { font-size:18px; }
+  .prodlist-desc { font-size:14px; }
+
+  /* Equipment */
+  .equip-grid { grid-template-columns:1fr 1fr; }
+  .equip-item { padding:16px 14px; }
+
+  /* Factory grid */
+  .factory-grid {
+    grid-template-columns:1fr 1fr;
+    grid-template-rows:160px 160px 160px;
+  }
+  .fac-cell.span { grid-column:1/3; grid-row:1; }
+
+  /* Quality hero */
+  .qual-hero { padding-top:52px; }
+  .qual-hero-text { padding-bottom:52px; }
+
+  /* Cert grid */
+  .cert-grid { grid-template-columns:1fr; }
+
+  /* HACCP */
+  .haccp-stages { grid-template-columns:1fr; }
+  .haccp-stage { padding:22px 18px; }
+
+  /* Hazard */
+  .hazard-grid { grid-template-columns:1fr; }
+
+  /* Form rows */
+  .frow { grid-template-columns:1fr; gap:0; margin-bottom:0; }
+  .contact-form { padding:24px 20px; }
+
+  /* FAQ */
+  .faq-left .stitle { font-size:26px; }
+
+  /* Footer */
+  .foot-inner { flex-direction:column; gap:20px; }
+  footer { padding-top:36px; padding-bottom:36px; }
+}
+
+/* ================================================
+   RESPONSIVE — SMALL MOBILE (≤ 380px)
+   ================================================ */
+@media (max-width:380px) {
+  .hero-h1 { font-size:40px; }
+  .vals { grid-template-columns:1fr; }
+  .vals .val-item { border-right:none !important; }
+  .prod-grid { grid-template-columns:1fr; }
+  .onestop-grid { grid-template-columns:1fr; }
+  .process-steps { grid-template-columns:1fr; }
+  .equip-grid { grid-template-columns:1fr; }
+  .partners-logos { grid-template-columns:repeat(2,1fr); }
+  .info-grid { grid-template-columns:1fr 1fr; }
+  .factory-grid { grid-template-columns:1fr; grid-template-rows:repeat(5,150px); }
+  .fac-cell.span { grid-column:auto; grid-row:auto; }
+  .org-teams { grid-template-columns:1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav>
+  <div class="nav-logo" onclick="showPage('home')">
+    <div class="nav-logo-mark">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2">
+        <path d="M12 2C8 4 4 7 4 11c0 5 4 9 8 11 4-2 8-6 8-11 0-4-4-7-8-9z"/>
+        <path d="M12 7v8M9 10l3-3 3 3"/>
+      </svg>
+    </div>
+    <div>
+      <div class="nav-logo-name">㈜해오름식품</div>
+      <span class="nav-logo-sub">Haeorum Food Co., Ltd.</span>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><button id="nav-home"    class="active" onclick="showPage('home')">홈</button></li>
+    <li><button id="nav-about"   onclick="showPage('about')">회사소개</button></li>
+    <li><button id="nav-mfg"     onclick="showPage('mfg')">제조·개발 역량</button></li>
+    <li><button id="nav-quality" onclick="showPage('quality')">품질·위생</button></li>
+    <li><button id="nav-contact" class="cta" onclick="showPage('contact')">사업문의</button></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" onclick="toggleDrawer()" aria-label="메뉴">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile drawer -->
+<div class="nav-drawer" id="nav-drawer">
+  <button id="dnav-home"    class="active" onclick="showPage('home');closeDrawer()">홈</button>
+  <button id="dnav-about"   onclick="showPage('about');closeDrawer()">회사소개</button>
+  <button id="dnav-mfg"     onclick="showPage('mfg');closeDrawer()">제조·개발 역량</button>
+  <button id="dnav-quality" onclick="showPage('quality');closeDrawer()">품질·위생</button>
+  <button class="cta-mob"   onclick="showPage('contact');closeDrawer()">사업문의 →</button>
+</div>
+
+<div class="pages">
+
+<!-- ============================================================
+     HOME
+     ============================================================ -->
+<div class="page active" id="page-home">
+
+  <section class="hero">
+    <div class="hero-bg ph">
+      <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="rgba(200,185,160,0.4)" stroke-width="0.8"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+      <span style="color:rgba(200,185,160,0.45); font-size:11px; letter-spacing:2px;">메인 이미지 — 자연 원료 (곡물·견과류)</span>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">㈜해오름식품 · Since 2007</div>
+      <h1 class="hero-h1">자연에서 온<br><em>먹거리</em></h1>
+      <p class="hero-sub">자연에서 온 원료를 체계적인 관리로 완성하는<br>식품 제조 파트너입니다.</p>
+      <div class="hero-btns">
+        <button class="btn-p" onclick="showPage('contact')">사업문의 하기</button>
+        <button class="btn-g" style="color:rgba(255,255,255,.8);border-color:rgba(255,255,255,.25)"
+          onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,.6)'"
+          onmouseout="this.style.color='rgba(255,255,255,.8)';this.style.borderColor='rgba(255,255,255,.25)'"
+          onclick="showPage('mfg')">제조 역량 보기</button>
+      </div>
+      <div class="hero-certs">
+        <div class="cert-pill"><span class="cert-dot"></span>HACCP 인증</div>
+        <div class="cert-pill"><span class="cert-dot"></span>유기가공식품 인증</div>
+        <div class="cert-pill"><span class="cert-dot"></span>벤처기업 인증</div>
+        <div class="cert-pill"><span class="cert-dot"></span>연구개발전담부서 인정</div>
+        <div class="cert-pill"><span class="cert-dot"></span>특허 2건 보유</div>
+      </div>
+    </div>
+    <div class="hero-img-label">주원료 — 유기농 곡물·견과류</div>
+  </section>
+
+  <!-- Values bar -->
+  <div class="vals">
+    <div class="val-item">
+      <div class="val-label">설립 2007년</div>
+      <div class="val-desc">20년 이상의 식품 제조 경험과 조직화된 인력 보유</div>
+    </div>
+    <div class="val-item">
+      <div class="val-label">100여개 고객사</div>
+      <div class="val-desc">국내외 주요 유통·브랜드에 안정적 납품 중</div>
+    </div>
+    <div class="val-item">
+      <div class="val-label">HACCP 기반</div>
+      <div class="val-desc">과자류·음료류 전 공정 위해요소 체계 관리</div>
+    </div>
+    <div class="val-item">
+      <div class="val-label">One-Stop Service</div>
+      <div class="val-desc">원료 수급부터 개발·생산·품질·납품까지 일괄 지원</div>
+    </div>
+  </div>
+
+  <!-- Products preview -->
+  <section class="prod-prev">
+    <div class="prod-prev-inner">
+      <div>
+        <div class="tag">Main Products</div>
+        <h2 class="stitle">주요<br>제조 품목</h2>
+        <div class="divider"></div>
+        <p class="btext">그래놀라·시리얼부터 두부과자, 오란다, 퍼핑스낵, 고구마칩, 크리스프 크래커까지. 유기농 원료를 기반으로 한 다양한 제품을 OEM·ODM으로 제조합니다.</p>
+        <div style="margin-top:22px;"><button class="btn-g" onclick="showPage('mfg')">제품 상세 보기 →</button></div>
+      </div>
+      <div class="prod-grid">
+        <div class="prod-card" onclick="showPage('mfg')">
+          <div class="prod-card-img c1 ph"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(120,90,30,0.4)" stroke-width="1"><circle cx="12" cy="12" r="9"/></svg></div>
+          <div class="prod-card-body"><div class="prod-card-name">그래놀라·시리얼</div><div class="prod-card-desc">유기농 오트밀 기반, 견과류·건과일 혼합</div></div>
+        </div>
+        <div class="prod-card" onclick="showPage('mfg')">
+          <div class="prod-card-img c2 ph"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(50,90,40,0.4)" stroke-width="1"><rect x="4" y="4" width="16" height="16" rx="2"/></svg></div>
+          <div class="prod-card-body"><div class="prod-card-name">두부과자</div><div class="prod-card-desc">국산 두부·우리밀 기반 베이킹 스낵</div></div>
+        </div>
+        <div class="prod-card" onclick="showPage('mfg')">
+          <div class="prod-card-img c3 ph"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(130,70,20,0.4)" stroke-width="1"><path d="M4 12h16M8 8l-4 4 4 4M16 8l4 4-4 4"/></svg></div>
+          <div class="prod-card-body"><div class="prod-card-name">오란다</div><div class="prod-card-desc">국산 쌀·유기농 쌀조청, 견과류 혼합</div></div>
+        </div>
+        <div class="prod-card" onclick="showPage('mfg')">
+          <div class="prod-card-img c4 ph"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(80,60,40,0.4)" stroke-width="1"><circle cx="12" cy="12" r="8"/></svg></div>
+          <div class="prod-card-body"><div class="prod-card-name">퍼핑스낵</div><div class="prod-card-desc">유기농 쌀 팽화, 자색고구마·단호박 활용</div></div>
+        </div>
+        <div class="prod-card" onclick="showPage('mfg')">
+          <div class="prod-card-img c5 ph"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(90,60,20,0.4)" stroke-width="1"><rect x="3" y="8" width="18" height="8" rx="2"/></svg></div>
+          <div class="prod-card-body"><div class="prod-card-name">고구마칩</div><div class="prod-card-desc">고구마·아몬드 100% 원물, 오븐 베이킹</div></div>
+        </div>
+        <div class="prod-card" onclick="showPage('mfg')">
+          <div class="prod-card-img c6 ph"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(100,70,30,0.4)" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="2"/></svg></div>
+          <div class="prod-card-body"><div class="prod-card-name">크리스프 크래커</div><div class="prod-card-desc">견과류·건과일 배합, 오븐 베이킹</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-strip">
+    <div>
+      <h2>제조 파트너를<br>찾고 계신가요?</h2>
+      <p>OEM·ODM 문의는 아래로 연락 주십시오. 영업일 기준 1일 내 답변드립니다.</p>
+    </div>
+    <button class="btn-p" onclick="showPage('contact')">사업문의 바로가기 →</button>
+  </section>
+
+</div><!-- /home -->
+
+
+<!-- ============================================================
+     ABOUT
+     ============================================================ -->
+<div class="page" id="page-about">
+
+  <section class="about-hero">
+    <div class="about-hero-left">
+      <div class="tag">About Us</div>
+      <h1 class="stitle">100여 개 고객사와<br>함께 성장해온<br>식품 제조 파트너</h1>
+      <div class="divider"></div>
+      <p class="btext">2007년 설립 이후 20년 이상의 제조 경험을 바탕으로, 건강과 환경의 가치를 지키는 원칙으로 생산합니다. 규모의 과장 없이, 실제 납품 결과로 신뢰를 쌓아왔습니다.</p>
+      <div style="margin-top:24px;display:flex;gap:12px;">
+        <button class="btn-p" onclick="showPage('contact')">사업문의</button>
+        <button class="btn-g" onclick="showPage('mfg')">제조 역량 보기</button>
+      </div>
+    </div>
+    <div class="about-hero-right ph">
+      <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+      <span>회사 대표 이미지</span>
+    </div>
+  </section>
+
+  <!-- Company info -->
+  <section class="info-grid-section">
+    <div class="info-grid">
+      <div class="info-cell"><div class="info-cell-label">설립일</div><div class="info-cell-val">2007년 1월</div></div>
+      <div class="info-cell"><div class="info-cell-label">대표자</div><div class="info-cell-val">김종완</div></div>
+      <div class="info-cell"><div class="info-cell-label">임직원</div><div class="info-cell-val">약 40명</div></div>
+      <div class="info-cell"><div class="info-cell-label">주요사업</div><div class="info-cell-val">식품 제조 및 도소매</div></div>
+      <div class="info-cell"><div class="info-cell-label">고객사</div><div class="info-cell-val">100여 개사</div></div>
+      <div class="info-cell"><div class="info-cell-label">브랜드</div><div class="info-cell-val">Haeorum</div></div>
+    </div>
+  </section>
+
+  <!-- Image mosaic strip -->
+  <div class="about-img-strip">
+    <div class="ai-cell ph" style="background:var(--beige2);">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+      <span style="font-size:10px;">공장 전경 이미지</span>
+    </div>
+    <div class="ai-cell ph" style="background:var(--beige);">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+      <span style="font-size:10px;">생산 현장</span>
+    </div>
+    <div class="ai-cell ph" style="background:#E0D8CC;">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+      <span style="font-size:10px;">원료 이미지</span>
+    </div>
+  </div>
+
+  <!-- Values -->
+  <section class="values-section">
+    <div class="values-inner">
+      <div>
+        <div class="tag">Values</div>
+        <h2 class="stitle">건강과 환경의<br>가치를 지키는<br>원칙으로 생산합니다</h2>
+        <div class="divider"></div>
+        <p class="btext">해오름식품은 제품 하나하나에 건강, 환경, 그리고 소비자에 대한 책임을 담습니다.</p>
+        <div class="values-grid" style="margin-top:28px;">
+          <div class="value-row">
+            <div class="value-ico">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8 4 4 7 4 11c0 5 4 9 8 11 4-2 8-6 8-11 0-4-4-7-8-9z"/></svg>
+            </div>
+            <div><div class="value-title">친환경 경영</div><div class="value-desc">생산에서 판매까지 환경보호를 실천하는 친환경 경영을 지향합니다.</div></div>
+          </div>
+          <div class="value-row">
+            <div class="value-ico">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            </div>
+            <div><div class="value-title">유기농 원료 우선</div><div class="value-desc">유기농산물을 우선 사용하고, 화학정제원료를 배제하는 원료 조달 원칙을 지킵니다.</div></div>
+          </div>
+          <div class="value-row">
+            <div class="value-ico">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+            </div>
+            <div><div class="value-title">무첨가 원칙</div><div class="value-desc">일체의 화학첨가물 사용을 배제하여 소비자가 안심하고 먹을 수 있는 제품을 만듭니다.</div></div>
+          </div>
+          <div class="value-row">
+            <div class="value-ico">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>
+            </div>
+            <div><div class="value-title">로하스 & 전통식품 현대화</div><div class="value-desc">고객과 직원의 행복을 실현하며, 우리 전통 간식의 맛을 현대적 미각으로 재해석합니다.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="values-img-side">
+        <div class="values-img-large ph" style="background:var(--beige2);">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+          <span style="font-size:10px;">제품 / 원료 이미지</span>
+        </div>
+        <div class="values-img-small ph" style="background:var(--beige);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+          <span style="font-size:10px;">시설 / 현장 이미지</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- History -->
+  <section class="history-section">
+    <div class="history-layout">
+      <div>
+        <div class="tag">History</div>
+        <h2 class="stitle">해오름은 뛰어왔고<br><span style="color:var(--org)">이제, 도약합니다</span></h2>
+        <div class="divider"></div>
+        <div class="history-table">
+      <div class="h-row">
+        <div class="h-year">2025</div>
+        <div class="h-items">
+          <div class="h-item"><span class="mo">10월</span>본사 이전 (전북 익산시) 및 지점 설치 (기존 논산공장)</div>
+          <div class="h-item"><span class="mo">7월</span>익산공장 신축</div>
+          <div class="h-item"><span class="mo">5월</span>논산공장 증축</div>
+        </div>
+      </div>
+      <div class="h-row">
+        <div class="h-year">2022</div>
+        <div class="h-items"><div class="h-item"><span class="mo">10월</span>생산 라인 증설</div></div>
+      </div>
+      <div class="h-row">
+        <div class="h-year">2019</div>
+        <div class="h-items">
+          <div class="h-item"><span class="mo">10월</span>연구개발전담부서 설립</div>
+          <div class="h-item"><span class="mo">9월</span>"나쵸칩" 태국 FDA 인증</div>
+        </div>
+      </div>
+      <div class="h-row">
+        <div class="h-year">2018</div>
+        <div class="h-items">
+          <div class="h-item"><span class="mo">1월</span>HACCP 인증 취득 (음료류)</div>
+          <div class="h-item"><span class="mo">8월</span>여성기업 인증</div>
+        </div>
+      </div>
+      <div class="h-row">
+        <div class="h-year">2015</div>
+        <div class="h-items">
+          <div class="h-item"><span class="mo">1월</span>HACCP 인증 취득 (과자류) / 유기취급자 인증</div>
+        </div>
+      </div>
+      <div class="h-row">
+        <div class="h-year">2014</div>
+        <div class="h-items">
+          <div class="h-item"><span class="mo">9월</span>본사 확장 이전 (현 논산시 노성면)</div>
+          <div class="h-item"><span class="mo">3월</span>벤처기업 인증</div>
+        </div>
+      </div>
+      <div class="h-row">
+        <div class="h-year">2013</div>
+        <div class="h-items"><div class="h-item"><span class="mo">12월</span>특허 제10-1344865호 "천연양념을 이용한 국내산 친환경 구운나초스낵의 제조방법"</div></div>
+      </div>
+      <div class="h-row">
+        <div class="h-year">2010</div>
+        <div class="h-items"><div class="h-item"><span class="mo">10월</span>CLEAN 사업장 인정</div></div>
+      </div>
+      <div class="h-row">
+        <div class="h-year">2009</div>
+        <div class="h-items">
+          <div class="h-item"><span class="mo">12월</span>유기가공식품 인증 / 충남농축산바이오기업기술지원사업 협약</div>
+        </div>
+      </div>
+      <div class="h-row">
+        <div class="h-year">2008</div>
+        <div class="h-items"><div class="h-item"><span class="mo">11월</span>특허 제10-0822717호 "당절임 콩"</div></div>
+      </div>
+      <div class="h-row">
+        <div class="h-year">2007</div>
+        <div class="h-items"><div class="h-item"><span class="mo">1월</span>㈜해오름식품 설립</div></div>
+      </div>
+    </div>
+      </div><!-- /history left col -->
+      <div class="history-img-col">
+        <div class="history-img-main ph" style="background:var(--beige2);">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+          <span style="font-size:10px;">생산 라인 이미지</span>
+        </div>
+        <div class="history-img-sub ph" style="background:var(--beige);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+          <span style="font-size:10px;">공장 전경</span>
+        </div>
+      </div><!-- /history img col -->
+    </div><!-- /history-layout -->
+  </section>
+
+  <!-- Partners -->
+  <section class="partners-section">
+    <div class="partners-lead">
+      <div class="tag">Partners</div>
+      <h2 class="stitle">함께하는 거래처</h2>
+      <div class="divider"></div>
+      <p class="btext" style="max-width:560px;">ORGA, lukt, EDIYA COFFEE, Greek day, Knotted, 신세계, 마켓컬리, 쿠팡, 이마트, 올가, 우리밀, 디즈니홈 등 100여 개 브랜드·유통사에 납품하고 있습니다.</p>
+    </div>
+    <div class="partners-logos">
+      <div class="partner-logo"><span>ORGA<br>Whole Foods</span></div>
+      <div class="partner-logo"><span>lukt</span></div>
+      <div class="partner-logo"><span>EDIYA<br>COFFEE</span></div>
+      <div class="partner-logo"><span>Greek day.</span></div>
+      <div class="partner-logo"><span>Knotted.</span></div>
+      <div class="partner-logo"><span>SHINSEGAE</span></div>
+      <div class="partner-logo"><span>Market<br>Kurly</span></div>
+      <div class="partner-logo"><span>coupang</span></div>
+      <div class="partner-logo"><span>이마트</span></div>
+      <div class="partner-logo"><span>우리밀</span></div>
+      <div class="partner-logo"><span>Disney HOME<br>Modern House</span></div>
+      <div class="partner-logo"><span>LOTTE MART</span></div>
+      <div class="partner-logo"><span>MAROCELL</span></div>
+      <div class="partner-logo"><span>OSULLOC</span></div>
+      <div class="partner-logo"><span>Vivliv</span></div>
+      <div class="partner-logo"><span>백곡당</span></div>
+      <div class="partner-logo"><span>FOODMERCE</span></div>
+      <div class="partner-logo"><span>OUR<br>GANSIK</span></div>
+      <div class="partner-logo"><span>SuperNuts</span></div>
+      <div class="partner-logo"><span>HUENIC</span></div>
+      <div class="partner-logo"><span>HYUNDAI<br>GREEN FOOD</span></div>
+      <div class="partner-logo"><span>배민마트</span></div>
+      <div class="partner-logo"><span>라잇</span></div>
+      <div class="partner-logo"><span>그 외<br>100여 개사</span></div>
+      <div class="partner-logo"><span>Mediquitous</span></div>
+      <div class="partner-logo"><span>OLH GOK</span></div>
+      <div class="partner-logo"><span>JONI'S<br>GROCERY</span></div>
+      <div class="partner-logo"><span>DAL GREEK</span></div>
+    </div>
+  </section>
+
+  <!-- Image gallery — replaces org chart -->
+  <section class="about-gallery-section">
+    <div class="about-gallery-grid">
+      <div class="ag-cell tall">
+        <div class="ag-cell-wrap ph" style="height:100%;background:var(--beige2);">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+          <span style="font-size:10px; letter-spacing:1.5px;">공장 전경 / 외관</span>
+        </div>
+      </div>
+      <div class="ag-cell">
+        <div class="ag-cell-wrap ph" style="height:100%;background:var(--beige);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+          <span style="font-size:10px; letter-spacing:1.5px;">베이킹 라인</span>
+        </div>
+      </div>
+      <div class="ag-cell">
+        <div class="ag-cell-wrap ph" style="height:100%;background:#E8E0D4;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+          <span style="font-size:10px; letter-spacing:1.5px;">생산 현장</span>
+        </div>
+      </div>
+      <div class="ag-cell">
+        <div class="ag-cell-wrap ph" style="height:100%;background:var(--beige);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+          <span style="font-size:10px; letter-spacing:1.5px;">위생 / 위생전실</span>
+        </div>
+      </div>
+      <div class="ag-cell">
+        <div class="ag-cell-wrap ph" style="height:100%;background:var(--sand);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+          <span style="font-size:10px; letter-spacing:1.5px;">원료 / 제품 컷</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /about -->
+
+
+<!-- ============================================================
+     MANUFACTURING
+     ============================================================ -->
+<div class="page" id="page-mfg">
+
+  <section class="mfg-hero">
+    <div>
+      <div class="tag">Manufacturing & Development</div>
+      <h1 class="stitle">제조·개발 역량</h1>
+      <div class="divider"></div>
+      <p class="btext">20년 이상의 노하우를 바탕으로 기획부터 완제품 납품까지 One-Stop Service를 제공합니다. 연구개발전담부서가 맛·건강성·양산성을 동시에 설계합니다.</p>
+    </div>
+    <div class="mfg-hero-img ph">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+      <span>생산 시설 이미지</span>
+    </div>
+  </section>
+
+  <!-- One-Stop Service -->
+  <section class="onestop-section">
+    <div class="tag">One-Stop Service</div>
+    <h2 class="stitle">판매에만 더 집중하세요</h2>
+    <div class="divider"></div>
+    <p class="btext" style="max-width:560px;">해오름은 전문 ODM/OEM사로서 상품의 기획, 개발, 생산, 품질관리, 출하에 이르기까지 토탈 솔루션을 제공합니다.</p>
+    <div class="onestop-grid">
+      <div class="os-item">
+        <div class="os-num">01</div>
+        <div class="os-ico">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M3 12h3M18 12h3M12 3v3M12 18v3"/></svg>
+        </div>
+        <div class="os-name">다양한 원료관리</div>
+        <div class="os-desc">신선하고 다양한 유기농 원료를 안정적으로 수급·관리합니다</div>
+      </div>
+      <div class="os-item">
+        <div class="os-num">02</div>
+        <div class="os-ico">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></svg>
+        </div>
+        <div class="os-name">원천 제조기술</div>
+        <div class="os-desc">20년 이상 축적된 독자적 제조·배합 기술 보유</div>
+      </div>
+      <div class="os-item">
+        <div class="os-num">03</div>
+        <div class="os-ico">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+        </div>
+        <div class="os-name">전문적인 품질관리</div>
+        <div class="os-desc">HACCP 기반 입고부터 출하까지 전 공정 품질 체계</div>
+      </div>
+      <div class="os-item">
+        <div class="os-num">04</div>
+        <div class="os-ico">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <div class="os-name">최신 법규 지원</div>
+        <div class="os-desc">표시기준·인증 요건 등 식품 관련 법규 최신 정보 지원</div>
+      </div>
+      <div class="os-item">
+        <div class="os-num">05</div>
+        <div class="os-ico">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="os-name">혁신적인 제품개발</div>
+        <div class="os-desc">연구개발전담부서가 트렌드·맛·건강성 반영한 신제품 기획</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OEM/ODM Process -->
+  <section class="process-section">
+    <div class="tag">ODM / OEM Process</div>
+    <h2 class="stitle">기획부터 납품까지<br>ODM·OEM 프로세스</h2>
+    <div class="divider"></div>
+    <p class="btext" style="max-width:540px;">해오름은 전문 ODM/OEM사로서 상품의 기획, 개발, 생산, 품질관리, 출하에 이르기까지 토탈 솔루션을 제공합니다.</p>
+    <div class="process-steps">
+      <div class="proc-step">
+        <div class="proc-num">01</div>
+        <div class="proc-name">고객사 의뢰</div>
+        <ul class="proc-items">
+          <li>시장 동향 파악</li>
+          <li>트렌드 분석</li>
+          <li>원하는 가격 설정</li>
+        </ul>
+      </div>
+      <div class="proc-step">
+        <div class="proc-num">02</div>
+        <div class="proc-name">제품 개발</div>
+        <ul class="proc-items">
+          <li>제품 기획</li>
+          <li>레시피 개발</li>
+          <li>제품 수정</li>
+          <li>시제품 제작</li>
+        </ul>
+      </div>
+      <div class="proc-step">
+        <div class="proc-num">03</div>
+        <div class="proc-name">제품 생산</div>
+        <ul class="proc-items">
+          <li>원료관리</li>
+          <li>품질관리</li>
+          <li>생산관리</li>
+        </ul>
+      </div>
+      <div class="proc-step">
+        <div class="proc-num">04</div>
+        <div class="proc-name">완제품 납품</div>
+        <ul class="proc-items">
+          <li>완제품 보관</li>
+          <li>출하</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product list -->
+  <section class="prodlist-section">
+    <div class="tag">Product Lines</div>
+    <h2 class="stitle">주요 제조 품목</h2>
+    <div class="divider"></div>
+    <div class="prodlist-grid">
+      <div class="prodlist-card">
+        <div class="prodlist-img c1 ph"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(120,90,30,0.4)" stroke-width="1"><circle cx="12" cy="12" r="9"/></svg><span>이미지</span></div>
+        <div class="prodlist-body">
+          <span class="prodlist-chip">Granola · Cereal</span>
+          <div class="prodlist-name">그래놀라 · 시리얼</div>
+          <p class="prodlist-desc">슈퍼푸드로 사랑받는 유기농 오트밀을 주 원료로 메이플시럽과 견과류, 씨앗 등을 넣어 만든 건강한 시리얼입니다. 기존 그래놀라보다 더욱 바삭한 식감과 중독성 있는 맛있는 풍미를 선사합니다. 납품 브랜드: lukt, Knotted, ORGA, Greek day, 우리밀, SuperNuts 등</p>
+        </div>
+      </div>
+      <div class="prodlist-card">
+        <div class="prodlist-img c2 ph"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(50,90,40,0.4)" stroke-width="1"><rect x="4" y="4" width="16" height="16" rx="2"/></svg><span>이미지</span></div>
+        <div class="prodlist-body">
+          <span class="prodlist-chip">Baking Snack</span>
+          <div class="prodlist-name">두부과자</div>
+          <p class="prodlist-desc">기름에 튀기지 않고 오븐에 구워 더욱 담백하고 건강하게 즐길 수 있습니다. 국산 풀무원 두부 30% 이상, 우리밀, 국산 검정깨 등 우수한 원재료로 만든 프리미엄 두부과자입니다. 납품 브랜드: ORGA, 풀무원, 아임웰 등</p>
+        </div>
+      </div>
+      <div class="prodlist-card">
+        <div class="prodlist-img c3 ph"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(130,70,20,0.4)" stroke-width="1"><path d="M4 12h16"/></svg><span>이미지</span></div>
+        <div class="prodlist-body">
+          <span class="prodlist-chip">Oranda</span>
+          <div class="prodlist-name">오란다</div>
+          <p class="prodlist-desc">오란다 강정의 장점만을 살려 말랑말랑 부드럽게 드실 수 있도록 유기농 쌀조청으로 버무리고 견과류를 넣어 고소한 맛을 더했습니다. 밀가루가 아닌 국산 쌀로 만들어 더욱 안심하고 드실 수 있습니다. 납품 브랜드: 태극당, 풀스케어 등</p>
+        </div>
+      </div>
+      <div class="prodlist-card">
+        <div class="prodlist-img c4 ph"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(80,60,40,0.4)" stroke-width="1"><circle cx="12" cy="12" r="8"/></svg><span>이미지</span></div>
+        <div class="prodlist-body">
+          <span class="prodlist-chip">Puffing Snack</span>
+          <div class="prodlist-name">퍼핑스낵</div>
+          <p class="prodlist-desc">열과 압력만을 이용하여 퍼핑(puffed)한 스낵입니다. 유기농 쌀에 자색고구마, 단호박, 블루베리 등 성형미의 종류대로 다양한 제품을 양산할 수 있습니다. 아기과자 또는 다이어트 간식용으로 사랑받고 있습니다. 납품 브랜드: 디즈니홈, 롯데마트, ORGA 등</p>
+        </div>
+      </div>
+      <div class="prodlist-card">
+        <div class="prodlist-img c5 ph"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(90,60,20,0.4)" stroke-width="1"><rect x="3" y="8" width="18" height="8" rx="2"/></svg><span>이미지</span></div>
+        <div class="prodlist-body">
+          <span class="prodlist-chip">Baking Snack</span>
+          <div class="prodlist-name">고구마칩</div>
+          <p class="prodlist-desc">고구마와 아몬드 100% 원물만 넣어 구운 바삭한 고구마칩입니다. 튀기지 않고 오븐에 구웠습니다. 설탕, 밀가루, 색소, 방부제가 들어가지 않아 건강하게 먹을 수 있습니다. 한 봉에 식물성 단백질, 몸에 좋은 불포화지방도 챙길 수 있습니다. 납품 브랜드: 마싯지우 등</p>
+        </div>
+      </div>
+      <div class="prodlist-card">
+        <div class="prodlist-img c6 ph"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(100,70,30,0.4)" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="2"/></svg><span>이미지</span></div>
+        <div class="prodlist-body">
+          <span class="prodlist-chip">Crisp Cracker</span>
+          <div class="prodlist-name">크리스프 크래커</div>
+          <p class="prodlist-desc">견과류, 건과일을 배합해 오븐에 구운 얇고 바삭한 식감을 지닌 프리미엄 크래커입니다. 치즈, 요거트, 버터 스프레드로 곁들여 먹기 좋습니다. 납품 브랜드: lukt, ORGA 등</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Equipment -->
+  <section class="equip-section">
+    <div class="tag">Equipment</div>
+    <h2 class="stitle" style="color:var(--white);">보유 설비</h2>
+    <div class="divider"></div>
+    <p class="btext" style="max-width:500px;">위생적인 환경에서 품질 높은 제품을 생산하고 있습니다.</p>
+    <div class="equip-grid">
+      <div class="equip-item">
+        <div class="equip-cat">베이킹·가공</div>
+        <ul class="equip-list">
+          <li>로타리오븐</li>
+          <li>컨벡션오븐</li>
+          <li>혼합기</li>
+          <li>반죽기</li>
+          <li>파이롤러</li>
+          <li>식품건조기</li>
+        </ul>
+      </div>
+      <div class="equip-item">
+        <div class="equip-cat">성형·절단</div>
+        <ul class="equip-list">
+          <li>하이서보(절단기)</li>
+          <li>오란다절단기</li>
+          <li>퍼핑머신</li>
+        </ul>
+      </div>
+      <div class="equip-item">
+        <div class="equip-cat">포장·검사</div>
+        <ul class="equip-list">
+          <li>로타리포장라인</li>
+          <li>조합식포장기</li>
+          <li>삼면포장기</li>
+          <li>알루미늄 금속검출기</li>
+          <li>금속검출기</li>
+        </ul>
+      </div>
+      <div class="equip-item">
+        <div class="equip-cat">보관·용수</div>
+        <ul class="equip-list">
+          <li>냉장/냉동창고</li>
+          <li>원료창고 1·2</li>
+          <li>정수처리시스템<br>(활성탄·UV·마이크로필터)</li>
+          <li>폐수처리장</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Factory photos -->
+  <section class="factory-section">
+    <div class="tag">Factory</div>
+    <h2 class="stitle">생산 시설</h2>
+    <div class="divider"></div>
+    <p class="btext">본사: 전북 익산시 왕궁면 푸드폴리스로 11길 52-8 / 제2공장: 충남 논산시 노성면 논산평야로 1213</p>
+    <div class="factory-grid">
+      <div class="fac-cell span ph" style="background:var(--beige2);">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+        <span style="font-size:11px;">공장 전경 / 베이킹라인</span>
+      </div>
+      <div class="fac-cell ph" style="background:var(--beige);">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+        <span style="font-size:11px;">내포장실</span>
+      </div>
+      <div class="fac-cell ph" style="background:#E8E0D4;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+        <span style="font-size:11px;">위생전실</span>
+      </div>
+      <div class="fac-cell ph" style="background:var(--beige);">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+        <span style="font-size:11px;">원료창고</span>
+      </div>
+      <div class="fac-cell ph" style="background:var(--sand);">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+        <span style="font-size:11px;">퍼핑스낵실</span>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /mfg -->
+
+
+<!-- ============================================================
+     QUALITY
+     ============================================================ -->
+<div class="page" id="page-quality">
+
+  <section class="qual-hero">
+    <div class="qual-hero-inner">
+      <div class="qual-hero-text">
+        <div class="tag">Quality &amp; Hygiene</div>
+        <h1 class="stitle">위생적인 환경에서<br>품질 높은 제품을<br>생산하고 있습니다</h1>
+        <div class="divider"></div>
+        <p class="btext">HACCP 인증을 기반으로 원료 입고에서 완제품 출하까지 전 공정에 걸쳐 위해요소 관리 체계를 운영합니다. 수치와 기록으로 증명하는 품질 관리를 원칙으로 합니다.</p>
+      </div>
+      <div class="qual-hero-img ph">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+        <span>위생 현장 이미지</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications -->
+  <section class="cert-section">
+    <div class="tag">Certifications</div>
+    <h2 class="stitle">보유 인증 현황</h2>
+    <div class="divider"></div>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <span class="cert-badge-label">품질</span>
+        <div class="cert-name">HACCP 인증 (과자류)</div>
+        <div class="cert-desc">식품안전관리인증기준(HACCP) 적용업소 인증. 과자류 전 공정 위해요소 관리.</div>
+      </div>
+      <div class="cert-card">
+        <span class="cert-badge-label">품질</span>
+        <div class="cert-name">HACCP 인증 (음료류)</div>
+        <div class="cert-desc">음료류 제조 공정에 대한 HACCP 인증 보유.</div>
+      </div>
+      <div class="cert-card">
+        <span class="cert-badge-label">유기농</span>
+        <div class="cert-name">유기가공식품 인증</div>
+        <div class="cert-desc">유기농 원료를 사용한 가공식품 제조에 대한 국가 인증 보유.</div>
+      </div>
+      <div class="cert-card">
+        <span class="cert-badge-label">기업</span>
+        <div class="cert-name">벤처기업 확인서</div>
+        <div class="cert-desc">기술력을 인정받은 벤처기업으로 확인. KIBO 기술보증기금 이사장 발행.</div>
+      </div>
+      <div class="cert-card">
+        <span class="cert-badge-label">기업</span>
+        <div class="cert-name">여성기업 확인서</div>
+        <div class="cert-desc">여성기업지원에 관한 법률에 따른 여성기업 인증 보유.</div>
+      </div>
+      <div class="cert-card">
+        <span class="cert-badge-label">연구</span>
+        <div class="cert-name">연구개발전담부서 인정</div>
+        <div class="cert-desc">과학기술정보통신부 인정 연구개발전담부서 운영 중.</div>
+      </div>
+      <div class="cert-card">
+        <span class="cert-badge-label">특허</span>
+        <div class="cert-name">특허 제10-1344865호</div>
+        <div class="cert-desc">"천연양념을 이용한 국내산 친환경 구운나초스낵의 제조방법" 특허 보유.</div>
+      </div>
+      <div class="cert-card">
+        <span class="cert-badge-label">특허</span>
+        <div class="cert-name">특허 제10-0822717호</div>
+        <div class="cert-desc">"당절임 콩" 제조방법 특허 보유.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HACCP Stages -->
+  <section class="haccp-section">
+    <div class="tag">HACCP System</div>
+    <h2 class="stitle">단계별 HACCP 관리</h2>
+    <div class="divider"></div>
+    <p class="btext" style="max-width:540px;">입고부터 출하까지 각 단계별 CCP(중요관리점) 및 OPRP를 설정하여 지속적으로 모니터링합니다.</p>
+    <div class="haccp-stages">
+      <div class="haccp-stage">
+        <div class="stage-lbl">Step 01</div>
+        <div class="stage-name">원료<br>입고</div>
+        <ul class="stage-list">
+          <li>공급업체 인증서 확인</li>
+          <li>관능·물리적 검사</li>
+          <li>잔류농약·중금속 COA 수령</li>
+          <li>불합격 원료 격리 보관</li>
+          <li>LOT 번호 부여</li>
+        </ul>
+      </div>
+      <div class="haccp-stage">
+        <div class="stage-lbl">Step 02</div>
+        <div class="stage-name">생산<br>공정</div>
+        <ul class="stage-list">
+          <li>CCP 온도·시간 모니터링</li>
+          <li>작업자 위생 상태 체크</li>
+          <li>교차오염 방지 동선 관리</li>
+          <li>위생전실 통과 의무화</li>
+          <li>공정 이탈 시 즉시 보류</li>
+        </ul>
+      </div>
+      <div class="haccp-stage">
+        <div class="stage-lbl">Step 03</div>
+        <div class="stage-name">검사<br>및 탐지</div>
+        <ul class="stage-list">
+          <li>알루미늄 금속탐지기 전수</li>
+          <li>일반 금속검출기 추가 통과</li>
+          <li>중량 검사</li>
+          <li>관능 검사 (색·향·식감)</li>
+          <li>이상 시 전량 재검</li>
+        </ul>
+      </div>
+      <div class="haccp-stage">
+        <div class="stage-lbl">Step 04</div>
+        <div class="stage-name">출하<br>관리</div>
+        <ul class="stage-list">
+          <li>LOT 단위 출하 기록</li>
+          <li>표시사항 최종 확인</li>
+          <li>유통기한·보관조건 명시</li>
+          <li>서류 (HACCP인증서·COA 등) 제공</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hazard -->
+  <section class="hazard-section">
+    <div class="tag">Hazard Control</div>
+    <h2 class="stitle">위해요소 관리 항목</h2>
+    <div class="divider"></div>
+    <p class="btext">HACCP 플랜에 따라 생물학적·화학적·물리적 위해요소별로 관리 기준과 대응 절차를 수립·운영하고 있습니다.</p>
+    <div class="hazard-grid">
+      <div class="hazard-card">
+        <span class="htag bio">생물학적</span>
+        <div class="hname">병원성 미생물 제어</div>
+        <div class="hdesc">가열 공정 온도·시간 CCP 설정. 작업자 손 세척 및 위생복 착용 의무화. 설비 세척·소독 주기 관리.</div>
+      </div>
+      <div class="hazard-card">
+        <span class="htag bio">생물학적</span>
+        <div class="hname">교차오염 방지</div>
+        <div class="hdesc">알러지 원료 취급 시 별도 라인·도구 사용. 원료 보관 구역 분리. 위생전실 운영.</div>
+      </div>
+      <div class="hazard-card">
+        <span class="htag chem">화학적</span>
+        <div class="hname">잔류농약·첨가물 관리</div>
+        <div class="hdesc">입고 원료 COA 수령 및 보관. 유기농 인증 원료 우선 사용. 화학정제원료 배제 원칙.</div>
+      </div>
+      <div class="hazard-card">
+        <span class="htag chem">화학적</span>
+        <div class="hname">윤활유 등 화학물질</div>
+        <div class="hdesc">식품용 윤활유(Food Grade) 사용 의무화. 정수처리시스템(활성탄·UV·마이크로필터) 가동.</div>
+      </div>
+      <div class="hazard-card">
+        <span class="htag phys">물리적</span>
+        <div class="hname">금속 이물 탐지</div>
+        <div class="hdesc">알루미늄 금속탐지기 및 일반 금속검출기 이중 전수 통과. 검출 시 전량 보류 및 원인 조사.</div>
+      </div>
+      <div class="hazard-card">
+        <span class="htag phys">물리적</span>
+        <div class="hname">경질 이물 관리</div>
+        <div class="hdesc">유리·도자기류 반입 금지 규정 시행. 설비 파손 시 즉시 작업 중단 및 전수 검사 실시.</div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /quality -->
+
+
+<!-- ============================================================
+     CONTACT
+     ============================================================ -->
+<div class="page" id="page-contact">
+
+  <section class="contact-hero">
+    <div class="tag">Contact Us</div>
+    <h1 class="stitle">사업문의</h1>
+    <div class="divider"></div>
+    <p class="btext" style="max-width:460px;">해오름은 고객사 여러분의 성공을 위하여 최선을 다하겠습니다. OEM·ODM 제조, 신제품 개발, 협력 관련 문의를 남겨 주세요.</p>
+  </section>
+
+  <section class="contact-main">
+    <div class="contact-info-map">
+
+      <!-- Info card -->
+      <div class="cinfo-box">
+        <div class="cinfo-head">
+          <h3>연락처 안내</h3>
+          <p>해오름은 고객사 여러분의 성공을 위하여 최선을 다하겠습니다</p>
+        </div>
+        <div class="cinfo-rows">
+          <div class="cinfo-row">
+            <div class="cinfo-ico">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.69 10.8 19.79 19.79 0 011.62 2.2 2 2 0 013.62.03h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.91 7.91a16 16 0 006.16 6.16l.95-.95a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            </div>
+            <div><div class="cinfo-label">대표 전화</div><div class="cinfo-val">041-742-0093</div></div>
+          </div>
+          <div class="cdivider"></div>
+          <div class="cinfo-row">
+            <div class="cinfo-ico">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div><div class="cinfo-label">이메일</div><div class="cinfo-val">horceo_g0@haeorum.biz</div></div>
+          </div>
+          <div class="cdivider"></div>
+          <div class="cinfo-row">
+            <div class="cinfo-ico">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <div class="cinfo-label">본사 (익산)</div>
+              <div class="cinfo-val">전북 익산시 왕궁면<br>푸드폴리스로 11길 52-8</div>
+            </div>
+          </div>
+          <div class="cdivider"></div>
+          <div class="cinfo-row">
+            <div class="cinfo-ico">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <div class="cinfo-label">제2공장 (논산)</div>
+              <div class="cinfo-val">충남 논산시 노성면<br>논산평야로 1213</div>
+            </div>
+          </div>
+          <div class="cdivider"></div>
+          <div class="cinfo-row">
+            <div class="cinfo-ico">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+            </div>
+            <div><div class="cinfo-label">홈페이지</div><div class="cinfo-val">heaorum.or.kr</div></div>
+          </div>
+        </div>
+        <div class="hours-box">
+          <div class="hours-title">운영 시간</div>
+          <div class="hours-row"><span class="dy">월 — 금</span><span class="tm">09:00 — 18:00</span></div>
+          <div class="hours-row"><span class="dy">토요일</span><span class="tm">09:00 — 13:00</span></div>
+          <div class="hours-row"><span class="dy">일 · 공휴일</span><span class="tm">휴무</span></div>
+          <div class="hours-row"><span class="dy">점심</span><span class="tm">12:00 — 13:00</span></div>
+        </div>
+      </div>
+
+      <!-- Map -->
+      <div class="map-box">
+        <div class="map-ph-area">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span style="font-size:11px; letter-spacing:1.5px; color:var(--wgray);">지도 영역 (Google Maps 삽입)</span>
+        </div>
+        <div class="map-footer">
+          <div class="map-addr">
+            <strong style="font-size:13px;font-weight:700;color:var(--org);letter-spacing:1px;">본사</strong>
+            &nbsp; 전북 익산시 왕궁면 푸드폴리스로 11길 52-8
+            &nbsp;&nbsp;&nbsp;
+            <strong style="font-size:13px;font-weight:700;color:var(--org);letter-spacing:1px;">제2공장</strong>
+            &nbsp; 충남 논산시 노성면 논산평야로 1213
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="faq-inner">
+      <div class="faq-left">
+        <div class="tag">FAQ</div>
+        <h2 class="stitle" style="font-size:32px;">자주<br>묻는<br>질문</h2>
+        <div class="divider"></div>
+        <p class="btext" style="font-size:14px;">추가 문의는 대표전화 또는 이메일로 연락 주십시오.</p>
+        <div style="margin-top:20px;">
+          <div style="font-size:14px;color:var(--org);font-weight:700;">041-742-0093</div>
+          <div style="font-size:14px;color:var(--wgray);margin-top:3px;">horceo_g0@haeorum.biz</div>
+        </div>
+      </div>
+      <div>
+        <div class="faq-list">
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">최소 주문 수량(MOQ)은 어떻게 되나요?<span class="faq-arrow"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6,9 12,15 18,9"/></svg></span></div>
+            <div class="faq-a"><div class="faq-a-inner">품목과 공정에 따라 상이합니다. 소량 테스트 오더부터 대량 양산까지 별도 협의를 통해 조율하고 있으니, 희망 수량을 문의 양식에 기재해 주시면 검토 후 안내드리겠습니다.</div></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">샘플 제작 기간은 어느 정도 걸리나요?<span class="faq-arrow"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6,9 12,15 18,9"/></svg></span></div>
+            <div class="faq-a"><div class="faq-a-inner">제품 복잡도에 따라 다르나, 문의 접수 후 일반적으로 7~14일 내 초도 샘플을 제공합니다. 레시피 협의가 필요한 경우 추가 시간이 소요될 수 있습니다.</div></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">레시피 개발부터 요청할 수 있나요?<span class="faq-arrow"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6,9 12,15 18,9"/></svg></span></div>
+            <div class="faq-a"><div class="faq-a-inner">가능합니다. 연구개발전담부서가 제품 컨셉, 타겟 고객층, 영양 조건 등을 바탕으로 배합 초안을 제안드립니다. 맛·건강성·양산성을 동시에 고려하여 개발합니다.</div></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">납품 시 HACCP 관련 서류를 받을 수 있나요?<span class="faq-arrow"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6,9 12,15 18,9"/></svg></span></div>
+            <div class="faq-a"><div class="faq-a-inner">HACCP 인증서, 원료 COA, 자사 품질 기준서 등 거래처에서 필요로 하는 서류를 사전 협의 후 제공해 드립니다. 필요 서류 목록을 문의 시 함께 알려 주십시오.</div></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">공장 견학이 가능한가요?<span class="faq-arrow"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6,9 12,15 18,9"/></svg></span></div>
+            <div class="faq-a"><div class="faq-a-inner">사전 협의 후 견학이 가능합니다. 위생 관리 상 방문 전 일정 조율이 필요하오니, 문의 양식 또는 대표 전화로 연락 주시면 안내드리겠습니다.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /contact -->
+
+</div><!-- /pages -->
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="foot-inner">
+    <div class="foot-brand">
+      <div class="fl">㈜해오름식품</div>
+      <p>
+        대표이사: 김종완 &nbsp;|&nbsp; 사업자등록번호: 000-00-00000<br>
+        본사: 전북 익산시 왕궁면 푸드폴리스로 11길 52-8<br>
+        제2공장: 충남 논산시 노성면 논산평야로 1213<br>
+        대표전화: 041-742-0093 &nbsp;|&nbsp; 이메일: horceo_g0@haeorum.biz
+      </p>
+    </div>
+    <div>
+      <div class="foot-links">
+        <a href="#">개인정보처리방침</a>
+        <a href="#">이용약관</a>
+        <a href="#">사업자정보 확인</a>
+      </div>
+    </div>
+  </div>
+  <div class="foot-bottom">© 2025 ㈜해오름식품. All rights reserved.</div>
+</footer>
+
+<script>
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.nav-drawer button[id^="dnav-"]').forEach(b => b.classList.remove('active'));
+
+  document.getElementById('page-' + name).classList.add('active');
+
+  const btn = document.getElementById('nav-' + name);
+  if (btn) btn.classList.add('active');
+
+  const dbtn = document.getElementById('dnav-' + name);
+  if (dbtn) dbtn.classList.add('active');
+
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function toggleDrawer() {
+  const drawer = document.getElementById('nav-drawer');
+  const ham    = document.getElementById('hamburger');
+  drawer.classList.toggle('open');
+  ham.classList.toggle('open');
+  document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+}
+
+function closeDrawer() {
+  document.getElementById('nav-drawer').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function toggleCheck(el) { el.classList.toggle('on'); }
+
+function toggleFaq(el) {
+  const item = el.parentElement;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// Close drawer on outside click
+document.addEventListener('click', function(e) {
+  const drawer = document.getElementById('nav-drawer');
+  const ham    = document.getElementById('hamburger');
+  if (drawer.classList.contains('open') && !drawer.contains(e.target) && !ham.contains(e.target)) {
+    closeDrawer();
+  }
+});
+</script>
+</body>
+</html>
